@@ -10,25 +10,24 @@
 #include <string>
 
 void printData(const std::vector<int>& data);
+void populateData
 
 int main()
 {
 	const int SIZE_OF_DATA = 10;
-	std::vector<int> data(SIZE_OF_DATA);
+	std::vector<int> data(0, SIZE_OF_DATA);
 	for (int i = 0; i < SIZE_OF_DATA; i++)
 	{
 		data[i] = i;
 	}
 
-	std::cout << "Your data Madame~" << std::endl
-		<< [data]() {std::string msg; for (auto& num : data) { msg += std::to_string(num) + " "; } return msg; }() << std::endl << std::endl;
+	printData(data);
 
 	std::random_device randomDevice;
 	std::mt19937 randomEngine(randomDevice());
 	std::shuffle(data.begin(), data.end(), randomEngine);
 
-	std::cout << "Your data Madame~" << std::endl
-		<< [data]() {std::string msg; for (auto& num : data) { msg += std::to_string(num) + " "; } return msg; }() << std::endl << std::endl;
+	printData(data);
 	
 	bool clean = true;
 	for (int i = SIZE_OF_DATA - 1; i >= 0; i--)
@@ -46,8 +45,7 @@ int main()
 		clean = true;
 	}
 
-	
-
+	printData(data);
 
 	return 0;
 }
