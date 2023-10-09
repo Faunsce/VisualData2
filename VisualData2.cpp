@@ -13,7 +13,9 @@
 const int SIZE_OF_DATA = 10;
 
 void printData(const std::vector<int>& data);
+void randomizeData(std::vector<int>& data);
 void bubbleSort(std::vector<int>& data);
+
 
 int main()
 {
@@ -23,9 +25,7 @@ int main()
 
 	printData(data);
 
-	std::random_device randomDevice;
-	std::mt19937 randomEngine(randomDevice());
-	std::shuffle(data.begin(), data.end(), randomEngine);
+	randomizeData(data);
 
 	printData(data);
 	
@@ -48,6 +48,15 @@ void printData(const std::vector<int>& data)
 
 	return;
 };
+
+void randomizeData(std::vector<int>& data)
+{
+	std::random_device randomDevice;
+	std::mt19937 randomEngine(randomDevice());
+	std::shuffle(data.begin(), data.end(), randomEngine);
+
+	return;
+}
 
 void bubbleSort(std::vector<int>& data)
 {
