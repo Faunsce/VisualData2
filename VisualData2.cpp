@@ -10,8 +10,6 @@
 #include <string>
 #include <numeric>
 
-const int SIZE_OF_DATA = 20;
-
 void printData(const std::vector<int>& data);
 void randomizeData(std::vector<int>& data);
 namespace dataAlgorithms {
@@ -22,7 +20,26 @@ namespace dataAlgorithms {
 
 int main()
 {
-	std::vector<int> data(SIZE_OF_DATA);
+	int dataSetSize;
+
+	do {
+		std::string userInput;
+		std::cout << "Please set the size of the array [10 - 100] : ";
+		std::cin >> userInput;
+
+		int value = std::stoi(userInput);
+		if (value > 100 || value < 10)
+		{
+			std::cout << "Invalid Input, please try again!" << std::endl;
+			continue;
+		}
+		dataSetSize = value;
+		break;
+	} while (true);
+
+	std::cout << "\x1b[2J\x1b[H";
+
+	std::vector<int> data(dataSetSize);
 	std::iota(data.begin(), data.end(), 0);
 
 	printData(data);
@@ -64,7 +81,7 @@ namespace dataAlgorithms {
 	void bubbleSort(std::vector<int>& data)
 	{
 		bool clean = true;
-		for (int i = SIZE_OF_DATA - 1; i >= 0; i--)
+		for (int i = data.size() - 1; i >= 0; i--)
 		{
 			for (int j = 0; j < i; j++)
 			{
@@ -88,7 +105,7 @@ namespace dataAlgorithms {
 		do
 		{
 			clean = true;
-			for (int i = 0; i < SIZE_OF_DATA - 1; i++)
+			for (int i = 0; i < data.size() - 1; i++)
 			{
 				if (data[i] > data[i + 1])
 				{
@@ -104,7 +121,7 @@ namespace dataAlgorithms {
 
 	void insertionSort(std::vector<int>& data)
 	{
-		for (int i = 0; i < SIZE_OF_DATA; i++)
+		for (int i = 0; i < data.size(); i++)
 		{
 			for (int j = i; j > 0; j--)
 			{
