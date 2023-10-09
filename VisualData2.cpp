@@ -25,13 +25,11 @@ int main()
 
 	printData(data);
 
-	insertionSort(data);
-
 	randomizeData(data);
 
 	printData(data);
 	
-	bubbleSort(data);
+	insertionSort(data);
 
 	printData(data);
 
