@@ -10,12 +10,13 @@
 #include <string>
 #include <numeric>
 
-const int SIZE_OF_DATA = 10;
+const int SIZE_OF_DATA = 20;
 
 void printData(const std::vector<int>& data);
 void randomizeData(std::vector<int>& data);
 void bubbleSort(std::vector<int>& data);
 void bogoSort(std::vector<int>& data);
+void insertionSort(std::vector<int>& data);
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
 
 	printData(data);
 
-	bogoSort(data);
+	insertionSort(data);
 
 	randomizeData(data);
 
@@ -96,6 +97,22 @@ void bogoSort(std::vector<int>& data)
 			}
 		}
 	} while (!clean);
+
+	return;
+}
+
+void insertionSort(std::vector<int>& data)
+{
+	for (int i = 0; i < SIZE_OF_DATA; i++)
+	{
+		for (int j = i; j > 0; j--)
+		{
+			if (data[j] < data[j - 1])
+			{
+				std::swap(data[j], data[j - 1]);
+			}
+		}
+	}
 
 	return;
 }
