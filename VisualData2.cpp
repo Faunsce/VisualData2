@@ -9,17 +9,15 @@
 #include <algorithm>
 #include <string>
 
+const int SIZE_OF_DATA = 10;
+
 void printData(const std::vector<int>& data);
-void populateData
+void bubbleSort(std::vector<int>& data);
 
 int main()
 {
-	const int SIZE_OF_DATA = 10;
-	std::vector<int> data(0, SIZE_OF_DATA);
-	for (int i = 0; i < SIZE_OF_DATA; i++)
-	{
-		data[i] = i;
-	}
+	
+	std::vector<int> data(0, SIZE_OF_DATA - 1);
 
 	printData(data);
 
@@ -29,6 +27,28 @@ int main()
 
 	printData(data);
 	
+	
+
+	printData(data);
+
+	return 0;
+}
+
+void printData(const std::vector<int>& data)
+{
+	std::string msg = "Your data Madame~ \n";
+	for (auto& num : data) 
+	{ 
+		msg += std::to_string(num) + " "; 
+	}
+	msg += "\n\n";
+	std::cout << msg;
+
+	return;
+};
+
+void bubbleSort(std::vector<int>& data)
+{
 	bool clean = true;
 	for (int i = SIZE_OF_DATA - 1; i >= 0; i--)
 	{
@@ -45,18 +65,5 @@ int main()
 		clean = true;
 	}
 
-	printData(data);
-
-	return 0;
+	return;
 }
-
-void printData(const std::vector<int>& data)
-{
-	std::string msg = "Your data Madame~ \n";
-	for (auto& num : data) 
-	{ 
-		msg += std::to_string(num) + " "; 
-	}
-	msg += "\n\n";
-	std::cout << msg;
-};
