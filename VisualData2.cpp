@@ -15,15 +15,16 @@ const int SIZE_OF_DATA = 10;
 void printData(const std::vector<int>& data);
 void randomizeData(std::vector<int>& data);
 void bubbleSort(std::vector<int>& data);
-
+void bogoSort(std::vector<int>& data);
 
 int main()
 {
-	
 	std::vector<int> data(SIZE_OF_DATA);
 	std::iota(data.begin(), data.end(), 0);
 
 	printData(data);
+
+	bogoSort(data);
 
 	randomizeData(data);
 
@@ -75,6 +76,26 @@ void bubbleSort(std::vector<int>& data)
 			break;
 		clean = true;
 	}
+
+	return;
+}
+
+void bogoSort(std::vector<int>& data)
+{
+	bool clean = true;
+	do
+	{
+		clean = true;
+		for (int i = 0; i < SIZE_OF_DATA - 1; i++)
+		{
+			if (data[i] > data[i + 1])
+			{
+				randomizeData(data);
+				clean = false;
+				break;
+			}
+		}
+	} while (!clean);
 
 	return;
 }
