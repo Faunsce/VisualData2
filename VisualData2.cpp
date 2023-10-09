@@ -14,9 +14,11 @@ const int SIZE_OF_DATA = 20;
 
 void printData(const std::vector<int>& data);
 void randomizeData(std::vector<int>& data);
-void bubbleSort(std::vector<int>& data);
-void bogoSort(std::vector<int>& data);
-void insertionSort(std::vector<int>& data);
+namespace dataAlgorithms {
+	void bubbleSort(std::vector<int>& data);
+	void bogoSort(std::vector<int>& data);
+	void insertionSort(std::vector<int>& data);
+}
 
 int main()
 {
@@ -29,7 +31,7 @@ int main()
 
 	printData(data);
 	
-	insertionSort(data);
+	dataAlgorithms::insertionSort(data);
 
 	printData(data);
 
@@ -58,59 +60,61 @@ void randomizeData(std::vector<int>& data)
 	return;
 }
 
-void bubbleSort(std::vector<int>& data)
-{
-	bool clean = true;
-	for (int i = SIZE_OF_DATA - 1; i >= 0; i--)
+namespace dataAlgorithms {
+	void bubbleSort(std::vector<int>& data)
 	{
-		for (int j = 0; j < i; j++)
+		bool clean = true;
+		for (int i = SIZE_OF_DATA - 1; i >= 0; i--)
 		{
-			if (data[j] > data[j + 1])
+			for (int j = 0; j < i; j++)
 			{
-				clean = false;
-				std::swap(data[j], data[j + 1]);
+				if (data[j] > data[j + 1])
+				{
+					clean = false;
+					std::swap(data[j], data[j + 1]);
+				}
 			}
-		}
-		if (clean)
-			break;
-		clean = true;
-	}
-
-	return;
-}
-
-void bogoSort(std::vector<int>& data)
-{
-	bool clean = true;
-	do
-	{
-		clean = true;
-		for (int i = 0; i < SIZE_OF_DATA - 1; i++)
-		{
-			if (data[i] > data[i + 1])
-			{
-				randomizeData(data);
-				clean = false;
+			if (clean)
 				break;
-			}
+			clean = true;
 		}
-	} while (!clean);
 
-	return;
-}
-
-void insertionSort(std::vector<int>& data)
-{
-	for (int i = 0; i < SIZE_OF_DATA; i++)
-	{
-		for (int j = i; j > 0; j--)
-		{
-			if (data[j] < data[j - 1])
-			{
-				std::swap(data[j], data[j - 1]);
-			}
-		}
+		return;
 	}
 
-	return;
+	void bogoSort(std::vector<int>& data)
+	{
+		bool clean = true;
+		do
+		{
+			clean = true;
+			for (int i = 0; i < SIZE_OF_DATA - 1; i++)
+			{
+				if (data[i] > data[i + 1])
+				{
+					randomizeData(data);
+					clean = false;
+					break;
+				}
+			}
+		} while (!clean);
+
+		return;
+	}
+
+	void insertionSort(std::vector<int>& data)
+	{
+		for (int i = 0; i < SIZE_OF_DATA; i++)
+		{
+			for (int j = i; j > 0; j--)
+			{
+				if (data[j] < data[j - 1])
+				{
+					std::swap(data[j], data[j - 1]);
+				}
+			}
+		}
+
+		return;
+	}
 }
