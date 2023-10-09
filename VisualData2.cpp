@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <string>
 
+void printData(const std::vector<int>& data);
+
 int main()
 {
 	const int SIZE_OF_DATA = 10;
@@ -44,9 +46,19 @@ int main()
 		clean = true;
 	}
 
-	std::cout << "Your data Madame~" << std::endl
-		<< [data]() {std::string msg; for (auto& num : data) { msg += std::to_string(num) + " "; } return msg; }() << std::endl << std::endl;
+	
 
 
 	return 0;
 }
+
+void printData(const std::vector<int>& data)
+{
+	std::string msg = "Your data Madame~ \n";
+	for (auto& num : data) 
+	{ 
+		msg += std::to_string(num) + " "; 
+	}
+	msg += "\n\n";
+	std::cout << msg;
+};
