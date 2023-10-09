@@ -29,7 +29,7 @@ int main()
 
 	printData(data);
 	
-	
+	bubbleSort(data);
 
 	printData(data);
 
