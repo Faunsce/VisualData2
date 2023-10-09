@@ -8,6 +8,7 @@
 #include <random>
 #include <algorithm>
 #include <string>
+#include <numeric>
 
 const int SIZE_OF_DATA = 10;
 
@@ -17,7 +18,8 @@ void bubbleSort(std::vector<int>& data);
 int main()
 {
 	
-	std::vector<int> data(0, SIZE_OF_DATA - 1);
+	std::vector<int> data(SIZE_OF_DATA);
+	std::iota(data.begin(), data.end(), 0);
 
 	printData(data);
 
