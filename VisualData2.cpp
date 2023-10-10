@@ -14,6 +14,7 @@
 
 #define SCREEN_CLEAR "\x1b[2J\x1b[H"
 
+std::vector<int> generateDataSet();
 void printData(const std::vector<int>& data);
 void randomizeData(std::vector<int>& data);
 namespace dataAlgorithms {
@@ -23,6 +24,36 @@ namespace dataAlgorithms {
 }
 
 int main()
+{
+	bool runAgain;
+
+	do {
+		runAgain = false;
+
+		std::vector<int> data = generateDataSet();
+
+		std::cout << SCREEN_CLEAR;
+		printData(data);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+		randomizeData(data);
+
+		std::cout << SCREEN_CLEAR;
+		printData(data);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+
+		dataAlgorithms::insertionSort(data);
+
+		std::cout << SCREEN_CLEAR;
+		printData(data);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	} while (runAgain);
+
+	return 0;
+}
+
+std::vector<int> generateDataSet()
 {
 	int dataSetSize;
 	do {
@@ -43,26 +74,8 @@ int main()
 	std::vector<int> data(dataSetSize);
 	std::iota(data.begin(), data.end(), 0);
 
-	std::cout << SCREEN_CLEAR;
-	printData(data);
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	
-	randomizeData(data);
-
-	std::cout << SCREEN_CLEAR;
-	printData(data);
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-	
-	dataAlgorithms::insertionSort(data);
-
-	std::cout << SCREEN_CLEAR;
-	printData(data);
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-
-	return 0;
-}
+	return data;
+};
 
 void printData(const std::vector<int>& data)
 {
