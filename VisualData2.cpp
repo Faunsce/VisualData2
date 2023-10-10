@@ -14,23 +14,26 @@
 
 #define SCREEN_CLEAR "\x1b[2J\x1b[H"
 
-std::vector<int> generateDataSet();
-void printData(const std::vector<int>& data);
-void randomizeData(std::vector<int>& data);
 namespace dataAlgorithms {
 	void bubbleSort(std::vector<int>& data);
 	void bogoSort(std::vector<int>& data);
 	void insertionSort(std::vector<int>& data);
 }
 
+std::vector<int> generateDataSet();
+void printData(const std::vector<int>& data);
+void randomizeData(std::vector<int>& data);
+void sortData(std::vector<int>& data);
+
 int main()
 {
 	bool runAgain;
+	std::vector<int> data;
 
 	do {
 		runAgain = false;
 
-		std::vector<int> data = generateDataSet();
+		data = generateDataSet();
 
 		std::cout << SCREEN_CLEAR;
 		printData(data);
@@ -42,8 +45,9 @@ int main()
 		printData(data);
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-
-		dataAlgorithms::insertionSort(data);
+		std::cout << SCREEN_CLEAR;
+		sortData(data);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 		std::cout << SCREEN_CLEAR;
 		printData(data);
@@ -51,52 +55,6 @@ int main()
 	} while (runAgain);
 
 	return 0;
-}
-
-std::vector<int> generateDataSet()
-{
-	int dataSetSize;
-	do {
-		std::string userInput;
-		std::cout << "Please set the size of the array [10 - 100] : ";
-		std::cin >> userInput;
-
-		int value = std::stoi(userInput);
-		if (value > 100 || value < 10)
-		{
-			std::cout << "Invalid Input, please try again!" << std::endl;
-			continue;
-		}
-		dataSetSize = value;
-		break;
-	} while (true);
-
-	std::vector<int> data(dataSetSize);
-	std::iota(data.begin(), data.end(), 0);
-
-	return data;
-};
-
-void printData(const std::vector<int>& data)
-{
-	std::string msg = "Your data Madame~ \n";
-	for (auto& num : data) 
-	{ 
-		msg += std::to_string(num) + " "; 
-	}
-	msg += "\n\n";
-	std::cout << msg;
-
-	return;
-};
-
-void randomizeData(std::vector<int>& data)
-{
-	std::random_device randomDevice;
-	std::mt19937 randomEngine(randomDevice());
-	std::shuffle(data.begin(), data.end(), randomEngine);
-
-	return;
 }
 
 namespace dataAlgorithms {
@@ -157,3 +115,89 @@ namespace dataAlgorithms {
 		return;
 	}
 }
+
+std::vector<int> generateDataSet()
+{
+	int dataSetSize;
+	do {
+		std::string userInput;
+		std::cout << "Please set the size of the array [10 - 100] : ";
+		std::cin >> userInput;
+
+		int value = std::stoi(userInput);
+		if (value > 100 || value < 10)
+		{
+			std::cout << "Invalid Input, please try again!" << std::endl;
+			continue;
+		}
+		dataSetSize = value;
+		break;
+	} while (true);
+
+	std::vector<int> data(dataSetSize);
+	std::iota(data.begin(), data.end(), 0);
+
+	return data;
+};
+
+void printData(const std::vector<int>& data)
+{
+	std::string msg = "Your data Madame~ \n";
+	for (auto& num : data) 
+	{ 
+		msg += std::to_string(num) + " "; 
+	}
+	msg += "\n\n";
+	std::cout << msg;
+
+	return;
+};
+
+void randomizeData(std::vector<int>& data)
+{
+	std::random_device randomDevice;
+	std::mt19937 randomEngine(randomDevice());
+	std::shuffle(data.begin(), data.end(), randomEngine);
+
+	return;
+}
+
+void sortData(std::vector<int>& data)
+{
+	bool processAgain = false;
+	do {
+		processAgain = false;
+		std::string userInput;
+		
+		std::cout << "Please select an option for sorting.\n"
+			<< "[0] - BogoSort \n"
+			<< "[1] - BubbleSort \n"
+			<< "[2] - InsertionSort \n"
+			<< "Selection : ";
+		
+		std::cin.clear();
+		std::getline(std::cin, userInput);
+		if (userInput.empty() || !std::isdigit(userInput[0]))
+		{
+			std::cout << "Invalid input try again." << std::endl;
+			processAgain = true;
+			continue;
+		};
+
+		switch (std::stoi(userInput.substr(0, 1)))
+		{
+		case 0:
+			dataAlgorithms::bogoSort(data);
+			break;
+		case 1:
+			dataAlgorithms::bubbleSort(data);
+			break;
+		case 2:
+			dataAlgorithms::insertionSort(data);
+			break;
+		default:
+			processAgain = true;
+			break;
+		}
+	} while (processAgain);
+};
